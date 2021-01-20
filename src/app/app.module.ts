@@ -3,16 +3,40 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FotosComponent } from './componentes/fotos/fotos.component';
+import { CargaComponent } from './componentes/carga/carga.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { CargaImagenesService} from './services/carga-imagenes.service';
+ 
+
+//firebase
+ import { AngularFireModule } from 'angularfire2';
+import { environment } from 'src/environments/environment';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
+// import { AngularFireAuthModule } from 'angularfire2/auth';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FotosComponent,
+    CargaComponent,
+    NavbarComponent,
+    FooterComponent,
+    NgDropFilesDirective
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireStorageModule // imports firebase/storage only needed for storage features
   ],
-  providers: [],
+  providers: [
+    CargaImagenesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-md-4">
+        <h3>Seleccione los archivos</h3>
+        <div class="well drop-zone file-over">
+            <h4>Deje caer aqui los archivos</h4>
+            <img src="../../../assets/drop-images.png" alt="">
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <h4>Carga Archivos</h4>
+        <div class="row">
+            <div class="col-md-3 mt-2">
+                <button (click)="cargarImagenes()" [disabled]="archivos.length === 0" class="btn btn-success ml-5">Cargar a Firebase</button>
+            </div>
+            <div class="col-md-3 mt-2">
+                <button class="btn btn-danger ml-5">Limpiar</button>    
+            </div>
+        </div>
+ 
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nombre Archivo</th>
+                    <th>Tamaño</th>
+                    <th>Progreso</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>XYZ</td>
+                    <td>12MB</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 25%;"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
