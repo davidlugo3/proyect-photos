@@ -15,6 +15,7 @@ import { CargaImagenesService} from './services/carga-imagenes.service';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 // import { AngularFireAuthModule } from 'angularfire2/auth';
 
@@ -32,7 +33,8 @@ import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-    AngularFireStorageModule // imports firebase/storage only needed for storage features
+    AngularFireStorageModule, // imports firebase/storage only needed for storage features
+    AngularFireDatabaseModule,
   ],
   providers: [
     CargaImagenesService
