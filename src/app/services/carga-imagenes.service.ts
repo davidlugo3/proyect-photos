@@ -9,12 +9,15 @@ import { FileItem } from '../models/file-item';
   providedIn: 'root'
 })
 export class CargaImagenesService {
-  private CARPETA_IMAGENES = 'imgagen';
+  private CARPETA_IMAGENES = 'productos';
   urlDownload:any;
   constructor(private db:AngularFirestore) { }
   
 
-  async cargarImagenesFirebase(imagenes: FileItem[]){
+  async cargarImagenesFirebase(imagenes: FileItem[],productos:any){
+    // this.CARPETA_IMAGENES=productos.tipo;
+    console.log(this.CARPETA_IMAGENES);
+    console.log(productos);
     console.log(imagenes)
     const storageRef = firebase.storage().ref();
     
@@ -41,16 +44,20 @@ export class CargaImagenesService {
           uploadTask.snapshot.ref.getDownloadURL().then((getUrl) => {
             item.url = getUrl;
             this.guardarImagen({
-              nombre: item.nombreArchivo,
+              nombreArchivo: item.nombreArchivo,
               url: item.url,
-              nombrePersona: 'david'
+              nombreProducto: productos.namep,
+              precio:productos.precio,
+              descripcion:  productos.descripcion,
+              tipo: productos.tipo
             });
         });
 
         });
     }
   }
-  private guardarImagen (imagen:{ nombre:string, url:string, nombrePersona:string}){
+  private guardarImagen (imagen:{ nombreArchivo:string, url:string, nombreProducto:string, precio:string, descripcion:string,tipo:string}){
+    const tipo_imagen = imagen.tipo;
     this.db.collection(`/${this.CARPETA_IMAGENES}`).add(imagen);
     
   }

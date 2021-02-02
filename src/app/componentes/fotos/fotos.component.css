@@ -1,0 +1,23 @@
+.example-card {
+    max-width: 1000px;
+  }
+  
+  .example-header-image {
+    /* background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg'); */
+    background-size: cover;
+  }
+
+
+  mat-card-header{
+    background: #fef5ff;
+    padding: 10px;
+    color:black;
+  }
+  mat-card-content{
+    padding: 10px;
+  }
+  
+  mat-card{
+    padding:0;
+  }
+  

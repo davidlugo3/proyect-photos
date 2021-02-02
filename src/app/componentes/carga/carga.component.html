@@ -1,46 +1,122 @@
-<div class="row">
-    <div class="col-md-4">
-        <h3>Seleccione los archivos</h3>
-        <div appNgDropFiles [archivos]="archivos" (mouseSobre)="estaSobreElemento=$event" [ngClass]="{'file-over':estaSobreElemento}" class="well drop-zone">
-            <h4>Deje caer aqui los archivos</h4>
-            <img src="../../../assets/drop-images.png" alt="">
-        </div>
-    </div>
 
-    <div class="col-md-8">
-        <h4>Carga Archivos</h4>
-        <div class="row">
-            <div class="col-md-4 mt-2">
-                <button (click)="cargarImagenes()" [disabled]="archivos.length === 0" class="btn btn-success ml-5">Cargar a Firebase</button>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Registro Producto</mat-card-title>
+    </mat-card-header>
+    <mat-card>
+        <mat-card-subtitle>Seleccione imagen del Producto</mat-card-subtitle>
+            <br>
+          <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- <h3>Seleccione imagen del producto</h3> -->
+                    <div appNgDropFiles [archivos]="archivos" (mouseSobre)="estaSobreElemento=$event" [ngClass]="{'file-over':estaSobreElemento}" class="well drop-zone">
+                        <h4>Deje caer aqui los archivos</h4>
+                        <img src="../../../assets/drop-images.png" alt="">
+                    </div>
+            
+                </div>
+                
+            
+                <div class="col-md-8">
+                    <h4>Carga Archivos</h4>
+                    <button (click)="limpiarImagenes()" class="btn btn-danger">Limpiar</button>
+                    <table class="table">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Nombre Archivo</th>
+                                <th>Tamaño</th>
+                                <th>Progreso</th>
+                            </tr>
+                        </thead>
+            
+                        <tbody>
+                            <tr *ngFor="let archivo of archivos">
+                                <td [ngClass]="{ 'text-green': archivo.progreso >= 100}">
+                                    {{archivo.nombreArchivo}}
+                                </td>
+                                <td>{{archivo.archivo.size / 1024 / 1024 | number: '.2-2'}}MB</td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': archivo.progreso + '%' }"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="col-md-4 mt-2">
-                <button (click)="limpiarImagenes()" class="btn btn-danger ml-5">Limpiar</button>
+          </div>
+        
+        
+        
+        
+        
+    </mat-card>
+
+
+    <mat-card class="mt-3">
+        <mat-card-subtitle>Descripción del Producto</mat-card-subtitle>
+        <form [formGroup]="productoRegistroForm" (ngSubmit)="onSubmit(productoRegistroForm)">
+        <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="namep" style="font-weight: bold;"><span style="color: red;">*</span>Nombre Producto</label>
+              <input type="text" class="form-control validation-field" id="namep" formControlName="namep">
+                <!-- <span class="text-danger animated fadeIn"
+                  *ngIf="acuerdosRegistroForm.controls.imputado.invalid && acuerdosRegistroForm.controls.imputado.touched">
+                  *El campo es requerido
+                </span> -->
             </div>
-        </div>
+
+            <div class="form-group col-md-12">
+                <label for="tipo" style="font-weight: bold;"><span style="color: red;">*</span>Tipo Producto</label>
+                <select id="tipo" class="form-control validation-field" formControlName="tipo">
+                    <option selected readonly disabled>Seleccionar...</option>
+                    <option  [ngValue]="tipo.name" *ngFor="let tipo of tipoProduct">{{tipo.name}}</option>
+                  </select>
+                  <!-- <span class="text-danger animated fadeIn"
+                    *ngIf="acuerdosRegistroForm.controls.imputado.invalid && acuerdosRegistroForm.controls.imputado.touched">
+                    *El campo es requerido
+                  </span> -->
+              </div>
+            <div class="form-group col-md-12">
+                <label for="precio" style="font-weight: bold;"><span style="color: red;">*</span>Precio</label>
+                <input type="text" class="form-control validation-field" id="precio" formControlName="precio">
+                <!-- <span class="text-danger animated fadeIn"
+                  *ngIf="acuerdosRegistroForm.controls.fechacimputado.invalid && acuerdosRegistroForm.controls.fechacimputado.touched">
+                  *El campo es requerido
+                </span> -->
+            </div>
+
+            
 
 
-        <table class="table">
-            <thead class="table-dark">
-                <tr>
-                    <th>Nombre Archivo</th>
-                    <th>Tamaño</th>
-                    <th>Progreso</th>
-                </tr>
-            </thead>
+          
+                <div class="form-group col-md-12">
+                    <label for="descripcion" class="font-weight-bold"><span style="color: red;">*</span>Descripción</label>
+                    <textarea class="form-control validation-field" id="descripcion" cols="30"
+                      rows="5" formControlName="descripcion"></textarea>
+                </div>
+             
+          </div>
 
-            <tbody>
-                <tr *ngFor="let archivo of archivos">
-                    <td [ngClass]="{ 'text-green': archivo.progreso >= 100}">
-                        {{archivo.nombreArchivo}}
-                    </td>
-                    <td>{{archivo.archivo.size / 1024 / 1024 | number: '.2-2'}}MB</td>
-                    <td>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': archivo.progreso + '%' }"></div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+
+         
+            <!-- <button (click)="cargarImagenes()" [disabled]="archivos.length === 0 && " class="btn btn-primary btn-block">Guardar</button> -->
+            <button class="btn btn-primary btn-block">Guardar</button>
+        </form>
+    </mat-card>
+</mat-card>
+<br><br><br><br>
+<hr>
+<pre>
+  Estado del formulario: {{ productoRegistroForm.valid }}
+  <br>
+  Status: {{ productoRegistroForm.status }}
+</pre>
+
+<pre>
+
+  {{ productoRegistroForm.value | json }}
+
+</pre>

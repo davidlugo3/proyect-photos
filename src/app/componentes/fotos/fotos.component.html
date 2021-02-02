@@ -1,31 +1,51 @@
-<!-- <div class="card-columns">
-    <div class="card" *ngFor="let item of items | async">
-        <img class="card-img-top" [src]="item.url" alt="">
-        <div class="card-body">
-            <h5 class="card-title">{{ item.nombre }}</h5>
-        </div>
+<mat-card>
+  <form [formGroup]="productoRegistroForm">
+    <div class="form-group col-md-12 mb-4">
+      <label for="tipo" style="font-weight: bold;"><span style="color: red;">*</span>Filtrar por</label>
+      <select id="tipo" class="form-control validation-field" formControlName="tipo">
+          <option selected readonly disabled>Arreglo...</option>
+          <option  [ngValue]="tipo.name" *ngFor="let tipo of tipoProduct">{{tipo.name}}</option>
+        </select>
+        <!-- <span class="text-danger animated fadeIn"
+          *ngIf="acuerdosRegistroForm.controls.imputado.invalid && acuerdosRegistroForm.controls.imputado.touched">
+          *El campo es requerido
+        </span> -->
     </div>
-</div>
- -->
-
-
-<!-- <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-      <div class="card mt-5" *ngFor="let item of items | async">
-        <img [src]="item.url" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{ item.nombre }}</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
+  </form>
+  
+  <div class="container">
+    <div class="row mt-2 row-cols-1 row-cols-md-2 g-4" >
+      <div class="col mb-4" *ngFor="let item of items | async">
+        <mat-card class="example-card mat-elevation-z8" >
+          <mat-card-header>
+            <mat-card-title style="font-weight: bold; font-size:17px;">{{ item.nombreProducto }}</mat-card-title>
+          </mat-card-header>
+          <img style="height: 100%; width: 100%;" [src]="item.url">
+          <mat-card-content>
+            <div class="container">
+              <h4 style="font-weight: bold; font-size:17px;">Descripción:</h4> <p>{{ item.descripcion }}</p>
+              <div class="row">
+                <div class="col-md-6">
+                  <h4 style="font-weight: bold; font-size:17px;">Precio:</h4>
+                </div>
+                <div class="col-md-6">
+                  <p>{{ item.precio }}</p>
+                </div>
+              </div>
+            </div>
+            
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+          </mat-card-actions>
+        </mat-card>
+        <br>
       </div>
     </div>
-</div> -->
-<div class="col">
-    <div class="card mb-3" *ngFor="let item of items | async">
-        <img  [src]="item.url" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{ item.nombre }}</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-    </div>
-</div>
+  </div>
+    
+    <br>
+  
+</mat-card>
+<br><br><br>
